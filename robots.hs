@@ -86,3 +86,14 @@ mejorOponente :: Robot -> Academia -> Robot
 mejorOponente robot academia = foldl1 (\r1 r2 -> if diferenciaDePoder robot r1 > diferenciaDePoder robot r2 then r1 else r2) academia
 --Encuentra el robot con la mayor diferencia de poder respecto al robot recibido.
 
+--Implementación sin recursividad:
+--Implementa la función 
+--6
+
+noPuedeDerrotarle :: Robot -> Robot -> Bool
+noPuedeDerrotarle atacante victima = energia atacante == energia (foldl (\vic pro -> pro vic) victima (programas atacante))
+
+--La condición es que, tras aplicar todos los programas que conoce al segundo robot, la energía del primero quede igual que antes, sin necesidad de usar recursividad.
+
+robotEjemplo :: Robot
+robotEjemplo = Robot {nombre = "Matias",nivelExperiencia = 5,energia = 100,programas = [recargaBateria 20, descargaElectrica, autoAtaque] }
