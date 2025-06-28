@@ -28,7 +28,7 @@ autoAtaque robot
 -- 2.
 
 poder :: Robot -> Int
-poder robot = energia robot + experiencia robot * length (programas robot)
+poder robot = energia robot + nivelExperiencia robot * length (programas robot)
 
 dano :: Robot -> Programa -> Int
 dano robot programa = energia robot - energia (programa robot)
@@ -36,3 +36,17 @@ dano robot programa = energia robot - energia (programa robot)
 diferenciaDePoder :: Robot -> Robot -> Int
 diferenciaDePoder robot1 robot2 = abs (poder robot1 - poder robot2)
 
+-- 3.
+
+type Academia = [Robot]
+
+existeAtlasSinProgramas :: Academia -> Bool
+existeAtlasSinProgramas academia = any esAtlasSinProgramas academia
+  where
+    esAtlasSinProgramas robot = nombre robot == "Atlas" && null (programas robot)
+
+todosViejosObstinados :: Academia -> Bool
+todosViejosObstinados academia = all esObstinado robotsViejos
+  where
+    robotsViejos = filter (\r -> nivelExperiencia r > 16) academia
+    esObstinado robot = length (programas robot) > 3 * experiencia robot
