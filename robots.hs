@@ -24,3 +24,15 @@ autoAtaque :: Programa
 autoAtaque robot
     | null (programas robot) = error "no tiene programas"
     | otherwise              = head (programas robot) robot
+
+-- 2.
+
+poder :: Robot -> Int
+poder robot = energia robot + experiencia robot * length (programas robot)
+
+dano :: Robot -> Programa -> Int
+dano robot programa = energia robot - energia (programa robot)
+
+diferenciaDePoder :: Robot -> Robot -> Int
+diferenciaDePoder robot1 robot2 = abs (poder robot1 - poder robot2)
+
