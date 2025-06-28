@@ -31,8 +31,10 @@ poder :: Robot -> Int
 poder robot = energia robot + nivelExperiencia robot * length (programas robot)
 
 dano :: Robot -> Programa -> Int
-dano robot programa = energia robot - energia (programa robot)
-
+dano robot programa 
+    |energia robot == energia (programa robot) = 0
+    | otherwise = energia robot - energia (programa robot)
+    
 diferenciaDePoder :: Robot -> Robot -> Int
 diferenciaDePoder robot1 robot2 = abs (poder robot1 - poder robot2)
 
